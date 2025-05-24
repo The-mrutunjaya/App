@@ -2,27 +2,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>App Store by MJ</title>
+  <title>MJ App Store</title>
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0d0d0d;
-      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d0d0d;
+      color: #fff;
       display: flex;
       flex-direction: column;
       height: 100vh;
     }
     header {
-      background-color: #1a1a1a;
-      padding: 15px;
+      background: linear-gradient(to right, #00ff88, #006644);
+      padding: 16px;
       text-align: center;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
-      border-bottom: 2px solid #00ff88;
+      color: black;
       position: fixed;
       width: 100%;
       top: 0;
@@ -30,65 +31,70 @@
     }
     .sidebar {
       position: fixed;
-      left: 0;
       top: 60px;
-      bottom: 0;
+      bottom: 60px;
+      left: 0;
       width: 220px;
-      background: #111;
+      background: #141414;
       border-right: 2px solid #00ff88;
       padding: 20px;
       overflow-y: auto;
     }
+    .sidebar h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #00ff88;
+    }
     .sidebar a {
       display: block;
-      color: #fff;
-      text-decoration: none;
+      color: #ddd;
       padding: 10px 0;
-      border-bottom: 1px solid #333;
+      text-decoration: none;
+      border-bottom: 1px solid #2a2a2a;
     }
     .sidebar a:hover {
       color: #00ff88;
     }
     .content {
-      margin-left: 220px;
+      margin-left: 240px;
       margin-top: 80px;
       margin-bottom: 80px;
       padding: 20px;
-      flex: 1;
       overflow-y: auto;
     }
     .search-bar {
-      max-width: 500px;
-      margin: 0 auto 20px auto;
       display: flex;
-      border-radius: 8px;
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 0 10px #00ff88;
     }
     .search-bar input {
       flex: 1;
-      padding: 10px;
-      border: none;
+      padding: 12px;
       font-size: 16px;
+      border: none;
     }
     .search-bar button {
-      padding: 10px;
-      background-color: #00ff88;
-      color: black;
+      background: #00ff88;
       border: none;
+      padding: 12px;
+      color: black;
       font-weight: bold;
       cursor: pointer;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 20px;
     }
     .card {
-      background-color: #1a1a1a;
+      background: #1c1c1c;
       border-radius: 10px;
       overflow: hidden;
-      border: 1px solid #00ff88;
-      transition: transform 0.2s;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+      transition: 0.3s ease;
     }
     .card:hover {
       transform: scale(1.02);
@@ -103,63 +109,89 @@
     }
     .card-title {
       font-size: 18px;
-      margin-bottom: 10px;
+      font-weight: bold;
+      margin-bottom: 8px;
     }
     .card-desc {
       font-size: 14px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
+      color: #bbb;
     }
     .download-btn {
-      background-color: #00ff88;
-      color: black;
-      padding: 8px 12px;
+      background: #00ff88;
+      color: #000;
+      padding: 8px 16px;
       border: none;
-      cursor: pointer;
       border-radius: 5px;
-      font-weight: bold;
       text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
     }
     .bottom-sheet {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: #111;
+      background: #141414;
       border-top: 2px solid #00ff88;
       display: flex;
       justify-content: space-around;
-      padding: 10px;
+      padding: 12px 0;
       z-index: 1000;
     }
     .bottom-sheet button {
       background: none;
       border: none;
-      color: white;
+      color: #ccc;
       font-size: 16px;
       cursor: pointer;
     }
     .bottom-sheet button:hover {
       color: #00ff88;
     }
+    .settings-section {
+      margin-top: 30px;
+    }
+    .settings-section h3 {
+      margin-bottom: 10px;
+      color: #00ff88;
+    }
+    .settings-section label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    .settings-section input[type="checkbox"] {
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
   <header>MJ App Store</header>  <div class="sidebar">
+    <h2>Navigation</h2>
     <a href="#">Home</a>
     <a href="#">Categories</a>
     <a href="#">Downloads</a>
+    <a href="#">Favorites</a>
     <a href="#">Settings</a>
     <a href="#">About</a>
   </div>  <div class="content">
     <div class="search-bar">
       <input type="text" id="search" placeholder="Search apps or books..." oninput="filterApps()">
       <button onclick="filterApps()">Search</button>
-    </div>
-    <div class="grid" id="appGrid"></div>
+    </div><div class="grid" id="appGrid"></div>
+
+<div class="settings-section">
+  <h3>Settings</h3>
+  <label><input type="checkbox"> Enable Dark Theme</label>
+  <label><input type="checkbox"> Show Featured Only</label>
+  <label><input type="checkbox"> Auto-Update Apps</label>
+</div>
+
   </div>  <div class="bottom-sheet">
     <button>Home</button>
     <button>Updates</button>
-    <button>Account</button>
+    <button>Profile</button>
+    <button>Help</button>
   </div>  <script>
     const apps = [
       {
@@ -176,12 +208,11 @@
       }
     ];
 
-    const appGrid = document.getElementById("appGrid");
-
     function renderApps(data) {
+      const appGrid = document.getElementById("appGrid");
       appGrid.innerHTML = data.map(app => `
         <div class="card">
-          <img src="${app.image}" alt="${app.title}">
+          <img src="${app.image}" alt="${app.title}" />
           <div class="card-content">
             <div class="card-title">${app.title}</div>
             <div class="card-desc">${app.description}</div>
@@ -193,7 +224,10 @@
 
     function filterApps() {
       const query = document.getElementById("search").value.toLowerCase();
-      const filtered = apps.filter(app => app.title.toLowerCase().includes(query) || app.description.toLowerCase().includes(query));
+      const filtered = apps.filter(app =>
+        app.title.toLowerCase().includes(query) ||
+        app.description.toLowerCase().includes(query)
+      );
       renderApps(filtered);
     }
 
