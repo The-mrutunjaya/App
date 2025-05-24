@@ -4,123 +4,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>App Download Landing Page</title>
   <style>
+    :root {
+      --bg-light: #fff;
+      --text-light: #000;
+      --bg-dark: #000;
+      --text-dark: #fff;
+      --accent-dark: #0f0;
+      --accent-light: #333;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      transition: background 0.3s, color 0.3s;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: all 0.3s;
     }
     .dark-mode {
-      background-color: #000;
-      color: white;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
     }
     header {
+      padding: 15px;
+      border-bottom: 1px solid #ccc;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid #ccc;
     }
-    nav {
+    nav a {
+      margin-left: 15px;
+      text-decoration: none;
+      color: inherit;
+      font-weight: bold;
+    }
+    .tab-bar {
       display: flex;
-      gap: 15px;
+      justify-content: space-around;
+      background-color: #f5f5f5;
+      padding: 10px 0;
     }
-    .settings {
-      display: none;
-      margin-top: 20px;
+    .tab-bar button {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
     }
-    .show {
-      display: block;
+    .dark-mode .tab-bar {
+      background-color: #111;
     }
-    .download-section {
-      margin: 30px 0;
+    .section {
+      padding: 20px;
     }
     .btn {
-      background-color: #4CAF50;
+      background-color: #28a745;
       color: white;
-      padding: 10px 15px;
+      padding: 10px 20px;
       border: none;
-      cursor: pointer;
       border-radius: 5px;
+      cursor: pointer;
     }
     .bottom-sheet {
       position: fixed;
-      bottom: 0;
       left: 0;
       right: 0;
-      background: #f1f1f1;
+      bottom: 0;
+      background: #eee;
       padding: 15px;
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+      border-top: 1px solid #ccc;
     }
     .dark-mode .bottom-sheet {
       background: #111;
-    }
-    .feedback-btn {
-      position: fixed;
-      right: 20px;
-      bottom: 80px;
-      background-color: #28a745;
-      color: #fff;
-      padding: 10px;
-      border: none;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-    }
-    .review-box {
-      background: #e0e0e0;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-    .dark-mode .review-box {
-      background: #222;
       color: white;
+    }
+    .review {
+      margin-top: 10px;
+      padding: 10px;
+      border-left: 3px solid #4caf50;
+      background: #f9f9f9;
+    }
+    .dark-mode .review {
+      background: #222;
+    }
+    @media (max-width: 768px) {
+      .section {
+        padding: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>AppStore Clone</h1>
-      <nav>
-        <a href="#" onclick="toggleSettings()">Settings</a>
-        <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
-        <a href="mailto:support@example.com">Support</a>
-      </nav>
-    </header><div id="settings" class="settings">
-  <h2>Settings</h2>
-  <p>Customize your experience</p>
-  <label>
-    <input type="checkbox" onchange="toggleDarkMode()"> Enable Dark Mode
-  </label>
-</div>
-
-<section class="download-section">
-  <h2>Featured App</h2>
-  <p>Amazing App for Productivity</p>
-  <button class="btn" onclick="window.location.href='download.html'">Go to Download Page</button>
-</section>
-
-  </div><button class="feedback-btn" onclick="alert('Redirecting to Feedback Form')">+</button>
-
-  <div class="bottom-sheet">
-    <strong>User Reviews:</strong>
-    <div class="review-box">Awesome app! Highly recommend. - User A</div>
-    <div class="review-box">Great design and features. - User B</div>
-    <div class="review-box">Fast and reliable. - User C</div>
+  <header>
+    <h1>AppStore Clone</h1>
+    <nav>
+      <a href="#" onclick="toggleSettings()">Settings</a>
+      <a href="#" onclick="toggleDarkMode()">Dark Mode</a>
+    </nav>
+  </header>  <div class="tab-bar">
+    <button onclick="showTab('app1')">App 1</button>
+    <button onclick="showTab('app2')">App 2</button>
+  </div>  <div id="app1" class="section">
+    <h2>App One</h2>
+    <p>First app description with landing.</p>
+    <button class="btn" onclick="window.location.href='app1.html'">Go to Download Page</button>
+  </div>  <div id="app2" class="section" style="display:none">
+    <h2>App Two</h2>
+    <p>Second app description with landing.</p>
+    <button class="btn" onclick="window.location.href='app2.html'">Go to Download Page</button>
+  </div>  <div class="bottom-sheet">
+    <h3>Latest Reviews</h3>
+    <div class="review">Excellent App! - User 1</div>
+    <div class="review">Very Useful and Fast. - User 2</div>
+    <div class="review">Clean Interface! - User 3</div>
   </div>  <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
     }
-
+    function showTab(tabId) {
+      document.getElementById('app1').style.display = 'none';
+      document.getElementById('app2').style.display = 'none';
+      document.getElementById(tabId).style.display = 'block';
+    }
     function toggleSettings() {
-      const settingsPanel = document.getElementById('settings');
-      settingsPanel.classList.toggle('show');
+      alert("Settings panel coming soon!");
     }
   </script></body>
 </html>
