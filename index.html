@@ -1,263 +1,162 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MJ App Store</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppStore-Like APK & PDF Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
+      background: #f5f5f5;
       color: #222;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
     }
     header {
       background: #fff;
-      border-bottom: 1px solid #ccc;
-      padding: 16px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      color: #222;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .sidebar {
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+    nav ul li {
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    nav ul li:hover {
+      border-bottom: 2px solid #333;
+    }
+    #sidebar {
       position: fixed;
-      top: 60px;
-      bottom: 60px;
       left: 0;
-      width: 220px;
-      background: #f0f0f0;
+      top: 60px;
+      width: 200px;
+      background: #fff;
+      height: calc(100vh - 60px);
       border-right: 1px solid #ccc;
       padding: 20px;
-      overflow-y: auto;
     }
-    .sidebar h2 {
-      margin-bottom: 10px;
-      font-size: 18px;
-      color: #444;
+    #sidebar h3 {
+      margin-bottom: 15px;
     }
-    .sidebar a {
-      display: block;
-      color: #333;
-      padding: 10px 0;
-      text-decoration: none;
-      border-bottom: 1px solid #ddd;
-    }
-    .sidebar a:hover {
-      color: #000;
-    }
-    .content {
-      margin-left: 240px;
-      margin-top: 80px;
-      margin-bottom: 80px;
+    #main {
+      margin-left: 210px;
       padding: 20px;
-      overflow-y: auto;
     }
-    .search-bar {
-      display: flex;
-      max-width: 600px;
-      margin: 0 auto 20px auto;
+    .app-card {
       border: 1px solid #ccc;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .search-bar input {
-      flex: 1;
-      padding: 12px;
-      font-size: 16px;
-      border: none;
-      outline: none;
-    }
-    .search-bar button {
-      background: #444;
-      border: none;
-      padding: 12px;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      overflow: hidden;
-      transition: 0.3s ease;
-    }
-    .card:hover {
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-    .card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-    .card-content {
       padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background: #fff;
     }
-    .card-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .app-card h4 {
+      margin-bottom: 10px;
     }
-    .card-desc {
-      font-size: 14px;
-      margin-bottom: 12px;
-      color: #666;
-    }
-    .download-btn {
-      background: #444;
-      color: #fff;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 4px;
+    .app-card a {
       text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
+      color: #0066cc;
+    }
+    .settings {
+      border-top: 1px solid #ccc;
+      margin-top: 30px;
+      padding-top: 10px;
+    }
+    .settings label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
     }
     .bottom-sheet {
       position: fixed;
       bottom: 0;
       left: 0;
-      right: 0;
-      background: #fff;
-      border-top: 1px solid #ccc;
-      display: flex;
-      justify-content: space-around;
-      padding: 12px 0;
-      z-index: 1000;
+      width: 100%;
+      background: #eee;
+      padding: 15px;
+      box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    .bottom-sheet button {
-      background: none;
-      border: none;
-      color: #333;
-      font-size: 16px;
-      cursor: pointer;
+    .login-section {
+      margin-top: 20px;
     }
-    .bottom-sheet button:hover {
-      color: #000;
+    .login-section input {
+      padding: 8px;
+      margin-right: 5px;
     }
-    .settings-section {
-      margin-top: 30px;
-      border-top: 1px solid #ccc;
-      padding-top: 20px;
-    }
-    .settings-section h3 {
-      margin-bottom: 10px;
-      color: #222;
-    }
-    .settings-section label {
-      display: block;
-      margin-bottom: 8px;
-    }
-    .settings-section input[type="checkbox"] {
-      margin-right: 10px;
+    .app-detail {
+      padding: 15px;
+      background: #fafafa;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <header>MJ App Store</header>  <div class="sidebar">
-    <h2>Navigation</h2>
-    <a href="#">Home</a>
-    <a href="#">Categories</a>
-    <a href="#">Downloads</a>
-    <a href="#">Favorites</a>
-    <a href="#">Settings</a>
-    <a href="#">About</a>
-  </div>  <div class="content">
-    <div class="search-bar">
-      <input type="text" id="search" placeholder="Search apps or books..." oninput="filterApps()">
-      <button onclick="filterApps()">Search</button>
-    </div><div class="grid" id="appGrid"></div>
-
-<div class="settings-section">
-  <h3>Settings</h3>
-  <label><input type="checkbox" id="darkMode" onchange="toggleDarkMode()"> Enable Dark Theme</label>
-  <label><input type="checkbox" id="featuredOnly" onchange="toggleFeaturedOnly()"> Show Featured Only</label>
-  <label><input type="checkbox" id="autoUpdate" onchange="toggleAutoUpdate()"> Auto-Update Apps</label>
-</div>
-
-  </div>  <div class="bottom-sheet">
-    <button>Home</button>
-    <button>Updates</button>
-    <button>Profile</button>
-    <button>Help</button>
-  </div>  <script>
-    let darkMode = false;
-    let featuredOnly = false;
-    let autoUpdate = false;
-
-    const apps = [
-      {
-        title: "BioNotes",
-        description: "Biotech PDF notes for students",
-        image: "https://via.placeholder.com/300x160",
-        landing: "pages/BioNotes.html",
-        featured: true
-      },
-      {
-        title: "MJ Messenger",
-        description: "Fast and secure APK messenger app",
-        image: "https://via.placeholder.com/300x160",
-        landing: "pages/MJMessenger.html",
-        featured: false
-      }
-    ];
-
-    function renderApps(data) {
-      const appGrid = document.getElementById("appGrid");
-      appGrid.innerHTML = data.map(app => `
-        <div class="card">
-          <img src="${app.image}" alt="${app.title}" />
-          <div class="card-content">
-            <div class="card-title">${app.title}</div>
-            <div class="card-desc">${app.description}</div>
-            <a href="${app.landing}" class="download-btn">View Details</a>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function filterApps() {
-      const query = document.getElementById("search").value.toLowerCase();
-      const filtered = apps.filter(app => {
-        const matchesSearch = app.title.toLowerCase().includes(query) || app.description.toLowerCase().includes(query);
-        const matchesFeatured = featuredOnly ? app.featured : true;
-        return matchesSearch && matchesFeatured;
-      });
-      renderApps(filtered);
-    }
-
-    function toggleDarkMode() {
-      darkMode = !darkMode;
-      document.body.style.background = darkMode ? "#111" : "#f9f9f9";
-      document.body.style.color = darkMode ? "#eee" : "#222";
-    }
-
-    function toggleFeaturedOnly() {
-      featuredOnly = !featuredOnly;
-      filterApps();
-    }
-
-    function toggleAutoUpdate() {
-      autoUpdate = !autoUpdate;
-      alert("Auto-update is now " + (autoUpdate ? "enabled" : "disabled"));
-    }
-
-    renderApps(apps);
-  </script></body>
+  <header>
+    <h2>App & PDF Hub</h2>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>Categories</li>
+        <li>Top Charts</li>
+        <li>Updates</li>
+      </ul>
+    </nav>
+  </header>
+  <div id="sidebar">
+    <h3>Menu</h3>
+    <ul>
+      <li>All Apps</li>
+      <li>PDF Resources</li>
+      <li>Games</li>
+      <li>Education</li>
+      <li>Productivity</li>
+    </ul>
+    <div class="settings">
+      <h4>Settings</h4>
+      <label>Dark Mode <input type="checkbox" id="darkModeToggle"></label>
+      <label>Show Featured Only <input type="checkbox" id="featuredToggle"></label>
+      <label>Auto Update <input type="checkbox"></label>
+    </div>
+    <div class="login-section">
+      <h4>Login</h4>
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+      <button>Login</button>
+    </div>
+  </div>
+  <main id="main">
+    <div class="app-card">
+      <h4>Biotech Notes App</h4>
+      <p>A full collection of biotechnology notes and preparation material.</p>
+      <a href="app-detail.html">View Details</a>
+    </div>
+    <div class="app-card">
+      <h4>Genetics PDF Library</h4>
+      <p>Downloadable PDFs on genetics, bioinformatics, and molecular biology.</p>
+      <a href="pdf-detail.html">View Details</a>
+    </div>
+  </main>
+  <div class="bottom-sheet">
+    DOCS BY MJ - A simple app & PDF platform for students.
+  </div>
+  <script>
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('change', () => {
+      document.body.style.background = darkToggle.checked ? '#222' : '#f5f5f5';
+      document.body.style.color = darkToggle.checked ? '#fff' : '#222';
+    });
+  </script>
+</body>
 </html>
