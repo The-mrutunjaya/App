@@ -186,9 +186,9 @@
 
 <div class="settings-section">
   <h3>Settings</h3>
-  <label><input type="checkbox"> Enable Dark Theme</label>
-  <label><input type="checkbox"> Show Featured Only</label>
-  <label><input type="checkbox"> Auto-Update Apps</label>
+  <label><input type="checkbox" id="darkMode" onchange="toggleDarkMode()"> Enable Dark Theme</label>
+  <label><input type="checkbox" id="featuredOnly" onchange="toggleFeaturedOnly()"> Show Featured Only</label>
+  <label><input type="checkbox" id="autoUpdate" onchange="toggleAutoUpdate()"> Auto-Update Apps</label>
 </div>
 
   </div>  <div class="bottom-sheet">
@@ -197,18 +197,24 @@
     <button>Profile</button>
     <button>Help</button>
   </div>  <script>
+    let darkMode = false;
+    let featuredOnly = false;
+    let autoUpdate = false;
+
     const apps = [
       {
         title: "BioNotes",
         description: "Biotech PDF notes for students",
         image: "https://via.placeholder.com/300x160",
-        landing: "pages/BioNotes.html"
+        landing: "pages/BioNotes.html",
+        featured: true
       },
       {
         title: "MJ Messenger",
         description: "Fast and secure APK messenger app",
         image: "https://via.placeholder.com/300x160",
-        landing: "pages/MJMessenger.html"
+        landing: "pages/MJMessenger.html",
+        featured: false
       }
     ];
 
@@ -228,11 +234,28 @@
 
     function filterApps() {
       const query = document.getElementById("search").value.toLowerCase();
-      const filtered = apps.filter(app =>
-        app.title.toLowerCase().includes(query) ||
-        app.description.toLowerCase().includes(query)
-      );
+      const filtered = apps.filter(app => {
+        const matchesSearch = app.title.toLowerCase().includes(query) || app.description.toLowerCase().includes(query);
+        const matchesFeatured = featuredOnly ? app.featured : true;
+        return matchesSearch && matchesFeatured;
+      });
       renderApps(filtered);
+    }
+
+    function toggleDarkMode() {
+      darkMode = !darkMode;
+      document.body.style.background = darkMode ? "#111" : "#f9f9f9";
+      document.body.style.color = darkMode ? "#eee" : "#222";
+    }
+
+    function toggleFeaturedOnly() {
+      featuredOnly = !featuredOnly;
+      filterApps();
+    }
+
+    function toggleAutoUpdate() {
+      autoUpdate = !autoUpdate;
+      alert("Auto-update is now " + (autoUpdate ? "enabled" : "disabled"));
     }
 
     renderApps(apps);
