@@ -2,104 +2,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AppStore-Like APK & PDF Site</title>
+  <title>App & PDF Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
-    body {
-      background: #f5f5f5;
-      color: #222;
-    }
-    header {
-      background: #fff;
-      padding: 15px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 15px;
-    }
-    nav ul li {
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-    }
-    nav ul li:hover {
-      border-bottom: 2px solid #333;
-    }
-    #sidebar {
-      position: fixed;
-      left: 0;
-      top: 60px;
-      width: 200px;
-      background: #fff;
-      height: calc(100vh - 60px);
-      border-right: 1px solid #ccc;
-      padding: 20px;
-    }
-    #sidebar h3 {
-      margin-bottom: 15px;
-    }
-    #main {
-      margin-left: 210px;
-      padding: 20px;
-    }
-    .app-card {
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      background: #fff;
-    }
-    .app-card h4 {
-      margin-bottom: 10px;
-    }
-    .app-card a {
-      text-decoration: none;
-      color: #0066cc;
-    }
-    .settings {
-      border-top: 1px solid #ccc;
-      margin-top: 30px;
-      padding-top: 10px;
-    }
-    .settings label {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .bottom-sheet {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #eee;
-      padding: 15px;
-      box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .login-section {
-      margin-top: 20px;
-    }
-    .login-section input {
-      padding: 8px;
-      margin-right: 5px;
-    }
-    .app-detail {
-      padding: 15px;
-      background: #fafafa;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
+    :root {
+      --primary-color: #222;
+      --secondary-color: #fff;
+      --accent-color: #00ff99;
+      --border-color: #ccc;
+    }body.dark {
+  --primary-color: #000;
+  --secondary-color: #0d0d0d;
+  --accent-color: #00ff99;
+  --border-color: #00ff99;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+header {
+  background: var(--secondary-color);
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+nav ul li {
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+nav ul li:hover {
+  border-bottom: 2px solid var(--accent-color);
+}
+
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 200px;
+  background: var(--secondary-color);
+  height: calc(100vh - 60px);
+  border-right: 1px solid var(--border-color);
+  padding: 20px;
+}
+
+#sidebar h3 {
+  margin-bottom: 15px;
+}
+
+#main {
+  margin-left: 210px;
+  padding: 20px;
+}
+
+.app-card {
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: var(--secondary-color);
+}
+
+.app-card h4 {
+  margin-bottom: 10px;
+}
+
+.app-card a {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+.settings {
+  border-top: 1px solid var(--border-color);
+  margin-top: 30px;
+  padding-top: 10px;
+}
+
+.settings label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--secondary-color);
+  padding: 15px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.login-section {
+  margin-top: 20px;
+}
+
+.login-section input {
+  padding: 8px;
+  margin-right: 5px;
+}
+
+.app-detail {
+  padding: 15px;
+  background: #fafafa;
+  margin-bottom: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    display: none;
+  }
+  #main {
+    margin-left: 0;
+  }
+  nav ul {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -107,27 +153,24 @@
     <h2>App & PDF Hub</h2>
     <nav>
       <ul>
-        <li>Home</li>
-        <li>Categories</li>
-        <li>Top Charts</li>
-        <li>Updates</li>
+        <li onclick="showCategory('home')">Home</li>
+        <li onclick="showCategory('pdf')">PDF</li>
+        <li onclick="showCategory('apps')">Apps</li>
+        <li onclick="showCategory('games')">Games</li>
       </ul>
     </nav>
-  </header>
-  <div id="sidebar">
+  </header>  <div id="sidebar">
     <h3>Menu</h3>
     <ul>
-      <li>All Apps</li>
-      <li>PDF Resources</li>
-      <li>Games</li>
-      <li>Education</li>
-      <li>Productivity</li>
+      <li onclick="showCategory('home')">Home</li>
+      <li onclick="showCategory('pdf')">PDF Resources</li>
+      <li onclick="showCategory('apps')">Apps</li>
+      <li onclick="showCategory('games')">Games</li>
     </ul>
     <div class="settings">
       <h4>Settings</h4>
       <label>Dark Mode <input type="checkbox" id="darkModeToggle"></label>
       <label>Show Featured Only <input type="checkbox" id="featuredToggle"></label>
-      <label>Auto Update <input type="checkbox"></label>
     </div>
     <div class="login-section">
       <h4>Login</h4>
@@ -135,28 +178,43 @@
       <input type="password" placeholder="Password">
       <button>Login</button>
     </div>
-  </div>
-  <main id="main">
-    <div class="app-card">
+  </div>  <main id="main">
+    <div class="app-card category home apps">
       <h4>Biotech Notes App</h4>
       <p>A full collection of biotechnology notes and preparation material.</p>
       <a href="app-detail.html">View Details</a>
     </div>
-    <div class="app-card">
+    <div class="app-card category home pdf">
       <h4>Genetics PDF Library</h4>
       <p>Downloadable PDFs on genetics, bioinformatics, and molecular biology.</p>
       <a href="pdf-detail.html">View Details</a>
     </div>
-  </main>
-  <div class="bottom-sheet">
+    <div class="app-card category games">
+      <h4>BioTrivia Game</h4>
+      <p>Learn and test your knowledge of biotech with fun trivia!</p>
+      <a href="#">Play Now</a>
+    </div>
+  </main>  <div class="bottom-sheet">
     DOCS BY MJ - A simple app & PDF platform for students.
-  </div>
-  <script>
+  </div>  <script>
     const darkToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
     darkToggle.addEventListener('change', () => {
-      document.body.style.background = darkToggle.checked ? '#222' : '#f5f5f5';
-      document.body.style.color = darkToggle.checked ? '#fff' : '#222';
+      body.classList.toggle('dark', darkToggle.checked);
     });
-  </script>
-</body>
+
+    function showCategory(cat) {
+      const cards = document.querySelectorAll('.app-card');
+      cards.forEach(card => {
+        if (card.classList.contains(cat) || cat === 'home') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Default category
+    showCategory('home');
+  </script></body>
 </html>
