@@ -1,286 +1,126 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GreenStore - App Landing</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Download Landing Page</title>
   <style>
-    :root {
-      --accent: #00cc66;
-      --text: #000;
-      --bg: #f9f9f9;
-      --dark-bg: #111;
-      --dark-text: #fff;
-      --light-text: #333;
-      --secondary: #999;
-    }body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-body.dark {
-  background-color: var(--dark-bg);
-  color: var(--dark-text);
-}
-
-header {
-  padding: 1rem;
-  background-color: var(--accent);
-  color: white;
-  text-align: center;
-  font-weight: bold;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 0.8rem 1rem;
-  background: #e0e0e0;
-}
-
-nav.dark {
-  background: #222;
-}
-
-nav a {
-  color: var(--text);
-  text-decoration: none;
-  font-size: 0.9rem;
-  margin: 0.3rem 0.5rem;
-}
-
-nav.dark a {
-  color: var(--dark-text);
-}
-
-.container {
-  padding: 1.5rem;
-  max-width: 800px;
-  margin: auto;
-}
-
-.screenshot {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-.details {
-  margin-bottom: 1.5rem;
-}
-
-.details h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.4rem;
-}
-
-.details p, .details ul {
-  font-size: 0.95rem;
-}
-
-.btn-download {
-  display: inline-block;
-  padding: 0.7em 1.4em;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.toggle-dark {
-  margin-top: 1rem;
-  display: block;
-  text-align: center;
-  cursor: pointer;
-  color: var(--accent);
-}
-
-footer {
-  margin-top: 2rem;
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.85rem;
-  background: #eee;
-}
-
-footer.dark {
-  background: #222;
-  color: #aaa;
-}
-
-.bottom-sheet {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: -100%;
-  background: #fff;
-  border-top: 2px solid var(--accent);
-  padding: 1rem;
-  transition: bottom 0.3s ease-in-out;
-  max-height: 60vh;
-  overflow-y: auto;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-}
-
-.bottom-sheet.dark {
-  background: #1a1a1a;
-  color: var(--dark-text);
-}
-
-.bottom-sheet-toggle {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.review {
-  border-bottom: 1px solid #ccc;
-  padding: 0.5rem 0;
-  font-size: 0.85rem;
-}
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.tab {
-  padding: 0.4rem 1rem;
-  border: 1px solid var(--accent);
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.tab.active {
-  background: var(--accent);
-  color: white;
-}
-
-.settings-section {
-  display: none;
-  margin-top: 1.5rem;
-  border-top: 1px solid #ccc;
-  padding-top: 1rem;
-}
-
-.settings-section h3 {
-  margin-bottom: 0.5rem;
-}
-
-.setting-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-
-.setting-item label {
-  font-size: 0.9rem;
-}
-
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #000;
+      color: white;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+    .settings {
+      display: none;
+      margin-top: 20px;
+    }
+    .show {
+      display: block;
+    }
+    .download-section {
+      margin: 30px 0;
+    }
+    .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #f1f1f1;
+      padding: 15px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+    }
+    .dark-mode .bottom-sheet {
+      background: #111;
+    }
+    .feedback-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 80px;
+      background-color: #28a745;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .review-box {
+      background: #e0e0e0;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .dark-mode .review-box {
+      background: #222;
+      color: white;
+    }
   </style>
 </head>
 <body>
-  <header>
-    GreenStore - App Preview
-  </header>  <nav id="top-nav">
-    <a href="#home">Home</a>
-    <a href="#features">Features</a>
-    <a href="#download">Download</a>
-    <a href="#settings" onclick="showSettings()">Settings</a>
-  </nav>  <div class="container">
-    <div class="tabs">
-      <div class="tab active" onclick="switchTab('app1')">App One</div>
-      <div class="tab" onclick="switchTab('app2')">App Two</div>
-    </div><div id="app1" class="app-tab">
-  <img src="https://via.placeholder.com/800x400?text=App+Screenshot" alt="App Screenshot" class="screenshot" />
-  <div class="details">
-    <h2>My Cool App</h2>
-    <p>Enhance your workflow with smart tools for tracking tasks and organizing notes.</p>
-    <ul>
-      <li>Version: 1.0.2</li>
-      <li>Size: 12MB</li>
-      <li>Updated: May 2025</li>
-    </ul>
-  </div>
-  <a href="downloads/mycoolapp.apk" class="btn-download">Download APK</a>
+  <div class="container">
+    <header>
+      <h1>AppStore Clone</h1>
+      <nav>
+        <a href="#" onclick="toggleSettings()">Settings</a>
+        <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
+        <a href="mailto:support@example.com">Support</a>
+      </nav>
+    </header><div id="settings" class="settings">
+  <h2>Settings</h2>
+  <p>Customize your experience</p>
+  <label>
+    <input type="checkbox" onchange="toggleDarkMode()"> Enable Dark Mode
+  </label>
 </div>
 
-<div id="app2" class="app-tab" style="display: none;">
-  <img src="https://via.placeholder.com/800x400?text=Another+App" alt="Another App" class="screenshot" />
-  <div class="details">
-    <h2>Another App</h2>
-    <p>Stay informed with real-time updates and alerts. Your assistant on the go.</p>
-    <ul>
-      <li>Version: 2.3.1</li>
-      <li>Size: 18MB</li>
-      <li>Updated: April 2025</li>
-    </ul>
-  </div>
-  <a href="downloads/anotherapp.apk" class="btn-download">Download APK</a>
-</div>
+<section class="download-section">
+  <h2>Featured App</h2>
+  <p>Amazing App for Productivity</p>
+  <button class="btn" onclick="window.location.href='download.html'">Go to Download Page</button>
+</section>
 
-<div class="settings-section" id="settingsPanel">
-  <h3>Settings</h3>
-  <div class="setting-item">
-    <label for="autoUpdate">Enable Auto-Update</label>
-    <input type="checkbox" id="autoUpdate" />
-  </div>
-  <div class="setting-item">
-    <label for="notifications">Push Notifications</label>
-    <input type="checkbox" id="notifications" />
-  </div>
-</div>
+  </div><button class="feedback-btn" onclick="alert('Redirecting to Feedback Form')">+</button>
 
-<div class="toggle-dark" onclick="toggleDark()">Toggle Dark Mode</div>
-
-  </div>  <footer id="footer">
-    GreenStore &copy; 2025. All rights reserved.
-  </footer><button class="bottom-sheet-toggle" onclick="toggleBottomSheet()">Reviews</button>
-
-  <div class="bottom-sheet" id="bottomSheet">
-    <h3>User Reviews</h3>
-    <div class="review">John: Great app! Helped me stay organized every day.</div>
-    <div class="review">Priya: Simple interface and powerful features. Loved it!</div>
-    <div class="review">Chen: Needs dark mode improvements but works well overall.</div>
+  <div class="bottom-sheet">
+    <strong>User Reviews:</strong>
+    <div class="review-box">Awesome app! Highly recommend. - User A</div>
+    <div class="review-box">Great design and features. - User B</div>
+    <div class="review-box">Fast and reliable. - User C</div>
   </div>  <script>
-    function toggleDark() {
-      document.body.classList.toggle("dark");
-      document.getElementById('top-nav').classList.toggle("dark");
-      document.getElementById('footer').classList.toggle("dark");
-      document.getElementById('bottomSheet').classList.toggle("dark");
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
     }
 
-    function toggleBottomSheet() {
-      const sheet = document.getElementById('bottomSheet');
-      sheet.style.bottom = (sheet.style.bottom === '0px') ? '-100%' : '0px';
-    }
-
-    function switchTab(id) {
-      document.querySelectorAll('.app-tab').forEach(tab => tab.style.display = 'none');
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(id).style.display = 'block';
-      event.target.classList.add('active');
-    }
-
-    function showSettings() {
-      const panel = document.getElementById('settingsPanel');
-      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    function toggleSettings() {
+      const settingsPanel = document.getElementById('settings');
+      settingsPanel.classList.toggle('show');
     }
   </script></body>
 </html>
