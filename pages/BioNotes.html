@@ -36,21 +36,6 @@
       color: inherit;
       font-weight: bold;
     }
-    .tab-bar {
-      display: flex;
-      justify-content: space-around;
-      background-color: #f5f5f5;
-      padding: 10px 0;
-    }
-    .tab-bar button {
-      background: none;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .dark-mode .tab-bar {
-      background-color: #111;
-    }
     .section {
       padding: 20px;
     }
@@ -84,6 +69,13 @@
     .dark-mode .review {
       background: #222;
     }
+    .meta {
+      font-size: 0.9em;
+      color: gray;
+    }
+    .dark-mode .meta {
+      color: #aaa;
+    }
     @media (max-width: 768px) {
       .section {
         padding: 15px;
@@ -98,16 +90,15 @@
       <a href="#" onclick="toggleSettings()">Settings</a>
       <a href="#" onclick="toggleDarkMode()">Dark Mode</a>
     </nav>
-  </header>  <div class="tab-bar">
-    <button onclick="showTab('app1')">App 1</button>
-    <button onclick="showTab('app2')">App 2</button>
-  </div>  <div id="app1" class="section">
+  </header>  <div class="section">
     <h2>App One</h2>
-    <p>First app description with landing.</p>
+    <p>A productivity app to help manage your tasks and notes effectively.</p>
+    <p class="meta">Version: 1.2.4 | Size: 8.6 MB | Rating: ★★★★☆</p>
     <button class="btn" onclick="window.location.href='app1.html'">Go to Download Page</button>
-  </div>  <div id="app2" class="section" style="display:none">
+  </div>  <div class="section">
     <h2>App Two</h2>
-    <p>Second app description with landing.</p>
+    <p>An educational PDF bundle with categorized resources and books.</p>
+    <p class="meta">Version: 2.1.0 | Size: 12.1 MB | Rating: ★★★★★</p>
     <button class="btn" onclick="window.location.href='app2.html'">Go to Download Page</button>
   </div>  <div class="bottom-sheet">
     <h3>Latest Reviews</h3>
@@ -118,13 +109,8 @@
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
     }
-    function showTab(tabId) {
-      document.getElementById('app1').style.display = 'none';
-      document.getElementById('app2').style.display = 'none';
-      document.getElementById(tabId).style.display = 'block';
-    }
     function toggleSettings() {
-      alert("Settings panel coming soon!");
+      alert("Settings panel is under development and will include preferences like language, layout, and more.");
     }
   </script></body>
 </html>
