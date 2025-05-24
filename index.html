@@ -2,172 +2,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App & PDF Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>App & PDF Store</title>
   <style>
     :root {
-      --primary-color: #222;
-      --secondary-color: #fff;
-      --text-color: #000;
-      --accent-color: #00ff99;
-      --border-color: #ccc;
-    }body.dark {
-  --primary-color: #000;
-  --secondary-color: #0d0d0d;
-  --text-color: #fff;
-  --accent-color: #00ff99;
-  --border-color: #00ff99;
-}
-
-* {
+      --primary-light: #2c3e50;
+      --primary-dark: #111;
+      --accent-dark: #00ff88;
+      --accent-light: #0baf9a;
+      --text-dark: #fff;
+      --text-light: #111;
+      --secondary-text-light: #333;
+    }* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: sans-serif;
 }
 
 body {
-  background: var(--secondary-color);
-  color: var(--text-color);
+  background: var(--primary-light);
+  color: var(--text-light);
   font-size: 14px;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: var(--primary-dark);
+  color: var(--text-dark);
+}
+
+header, footer, nav, aside, section {
+  padding: 1em;
 }
 
 header {
-  background: var(--secondary-color);
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: var(--accent-light);
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
-header h2 {
-  font-size: 16px;
+header .title {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-nav ul {
+.toggle-dark {
+  cursor: pointer;
+  background: none;
+  border: 1px solid #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.main-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+aside {
+  flex: 1 1 200px;
+  background: #e0e0e0;
+  min-height: 100vh;
+}
+
+body.dark aside {
+  background: #1a1a1a;
+}
+
+aside ul {
   list-style: none;
-  display: flex;
-  gap: 10px;
 }
 
-nav ul li {
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  font-size: 14px;
-}
-
-nav ul li:hover {
-  border-bottom: 2px solid var(--accent-color);
-}
-
-#sidebar {
-  position: fixed;
-  left: 0;
-  top: 60px;
-  width: 200px;
-  background: var(--secondary-color);
-  height: calc(100vh - 60px);
-  border-right: 1px solid var(--border-color);
-  padding: 15px;
-  font-size: 14px;
-}
-
-#sidebar h3, #sidebar h4 {
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-#sidebar ul li {
-  margin-bottom: 6px;
+aside li {
+  margin: 0.5em 0;
   cursor: pointer;
 }
 
-#main {
-  margin-left: 210px;
-  padding: 20px;
-  font-size: 14px;
+main {
+  flex: 3;
+  padding: 1em;
 }
 
-.app-card {
-  border: 1px solid var(--border-color);
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  background: var(--secondary-color);
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1em;
+  margin-bottom: 1em;
+  background: #f9f9f9;
 }
 
-.app-card h4 {
-  margin-bottom: 6px;
-  font-size: 14px;
+body.dark .card {
+  background: #222;
+  border-color: var(--accent-dark);
 }
 
-.app-card a {
+.card h3 {
+  margin-bottom: 0.5em;
+}
+
+.card .download {
+  display: inline-block;
+  margin-top: 0.5em;
+  padding: 4px 8px;
+  background: var(--accent-light);
+  color: #fff;
   text-decoration: none;
-  color: var(--accent-color);
-  font-size: 13px;
+  border-radius: 4px;
 }
 
-.settings {
-  border-top: 1px solid var(--border-color);
-  margin-top: 20px;
-  padding-top: 10px;
-}
-
-.settings label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.bottom-sheet {
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  background: var(--accent-light);
+  color: #fff;
   position: fixed;
   bottom: 0;
-  left: 0;
   width: 100%;
-  background: var(--secondary-color);
-  padding: 10px;
-  border-top: 1px solid var(--border-color);
-  text-align: center;
-  font-size: 13px;
-}
-
-.login-section {
-  margin-top: 15px;
-}
-
-.login-section input {
-  padding: 6px;
-  margin-right: 4px;
-  font-size: 13px;
-}
-
-.login-section button {
-  padding: 6px 10px;
-  font-size: 13px;
-}
-
-.app-detail {
-  padding: 10px;
-  background: #fafafa;
-  margin-bottom: 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
 }
 
 @media (max-width: 768px) {
-  #sidebar {
-    display: none;
+  .main-layout {
+    flex-direction: column;
   }
-  #main {
-    margin-left: 0;
-  }
-  nav ul {
-    flex-wrap: wrap;
-    gap: 8px;
+
+  aside {
+    min-height: auto;
   }
 }
 
@@ -175,63 +136,43 @@ nav ul li:hover {
 </head>
 <body>
   <header>
-    <h2>App & PDF Hub</h2>
-    <nav>
+    <div class="title">GreenStore</div>
+    <button class="toggle-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  </header>  <div class="main-layout">
+    <aside>
       <ul>
-        <li onclick="showCategory('home')">Home</li>
-        <li onclick="showCategory('pdf')">PDF</li>
-        <li onclick="showCategory('apps')">Apps</li>
-        <li onclick="showCategory('games')">Games</li>
+        <li onclick="filterCategory('home')">Home</li>
+        <li onclick="filterCategory('apps')">Apps</li>
+        <li onclick="filterCategory('pdf')">PDFs</li>
+        <li onclick="filterCategory('games')">Games</li>
+        <li onclick="openSettings()">Settings</li>
       </ul>
-    </nav>
-  </header>  <div id="sidebar">
-    <h3>Menu</h3>
-    <ul>
-      <li onclick="showCategory('home')">Home</li>
-      <li onclick="showCategory('pdf')">PDF Resources</li>
-      <li onclick="showCategory('apps')">Apps</li>
-      <li onclick="showCategory('games')">Games</li>
-    </ul>
-    <div class="settings">
-      <h4>Settings</h4>
-      <label>Dark Mode <input type="checkbox" id="darkModeToggle"></label>
-      <label>Show Featured Only <input type="checkbox" id="featuredToggle"></label>
-    </div>
-    <div class="login-section">
-      <h4>Login</h4>
-      <input type="text" placeholder="Username">
-      <input type="password" placeholder="Password">
-      <button>Login</button>
-    </div>
-  </div>  <main id="main">
-    <div class="app-card category home apps">
-      <h4>Biotech Notes App</h4>
-      <p>A full collection of biotechnology notes and preparation material.</p>
-      <a href="app-detail.html">View Details</a>
-    </div>
-    <div class="app-card category home pdf">
-      <h4>Genetics PDF Library</h4>
-      <p>Downloadable PDFs on genetics, bioinformatics, and molecular biology.</p>
-      <a href="pdf-detail.html">View Details</a>
-    </div>
-    <div class="app-card category games">
-      <h4>BioTrivia Game</h4>
-      <p>Learn and test your knowledge of biotech with fun trivia!</p>
-      <a href="#">Play Now</a>
-    </div>
-  </main>  <div class="bottom-sheet">
-    DOCS BY MJ - A simple app & PDF platform for students.
-  </div>  <script>
-    const darkToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-    darkToggle.addEventListener('change', () => {
-      body.classList.toggle('dark', darkToggle.checked);
-    });
+    </aside><main id="content">
+  <!-- Example Item -->
+  <div class="card" data-category="apps">
+    <h3>Sample App</h3>
+    <p>This is a test app with features.</p>
+    <a href="app_landing.html" class="download">Open Page</a>
+  </div>
 
-    function showCategory(cat) {
-      const cards = document.querySelectorAll('.app-card');
+  <div class="card" data-category="pdf">
+    <h3>Study Notes</h3>
+    <p>Biotech study material in PDF.</p>
+    <a href="pdf_landing.html" class="download">Open Page</a>
+  </div>
+</main>
+
+  </div>  <footer>
+    © 2025 Docs by MJ
+  </footer>  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    function filterCategory(cat) {
+      const cards = document.querySelectorAll('.card');
       cards.forEach(card => {
-        if (card.classList.contains(cat) || cat === 'home') {
+        if (cat === 'home' || card.dataset.category === cat) {
           card.style.display = 'block';
         } else {
           card.style.display = 'none';
@@ -239,7 +180,8 @@ nav ul li:hover {
       });
     }
 
-    // Default category
-    showCategory('home');
+    function openSettings() {
+      alert("Settings modal coming soon...");
+    }
   </script></body>
 </html>
